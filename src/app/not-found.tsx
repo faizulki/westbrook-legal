@@ -1,20 +1,20 @@
-import { Button } from "@/components/ui/Button";
+import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <section className="flex min-h-[60vh] items-center justify-center px-6 py-28 text-center">
+    <section className="flex min-h-[60vh] items-center justify-center px-6 py-24 text-center">
       <div>
-        <p className="eyebrow text-xs font-semibold text-gold">Error 404</p>
-        <h1 className="mt-4 font-serif text-5xl font-semibold text-navy">
-          Page not found
-        </h1>
-        <p className="mx-auto mt-4 max-w-md text-slate">
-          The page you&apos;re looking for doesn&apos;t exist or has moved.
+        <p className="font-display text-sm uppercase tracking-[0.3em] text-gold">Error 404</p>
+        <h1 className="mt-4 font-display text-5xl font-semibold text-white">Page not found</h1>
+        <p className="mx-auto mt-4 max-w-md text-mist">
+          The page you are looking for doesn&apos;t exist or has moved.
         </p>
-        <div className="mt-8 flex justify-center gap-3">
-          <Button href="/">Return Home</Button>
-          <Button href="/contact" variant="outline">Contact Us</Button>
-        </div>
+        <Link
+          href="/"
+          className="mt-8 inline-block bg-gold px-7 py-3 font-display font-medium text-night transition-colors hover:bg-gold-bright"
+        >
+          Return home
+        </Link>
       </div>
     </section>
   );

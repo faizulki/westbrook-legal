@@ -1,83 +1,57 @@
 import type { Metadata } from "next";
-import { Inter, Lora } from "next/font/google";
+import { Playfair_Display, EB_Garamond } from "next/font/google";
 import "./globals.css";
+import { LanguageProvider } from "@/lib/i18n";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { site } from "@/lib/site";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
-const lora = Lora({
+const playfair = Playfair_Display({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-lora",
+  variable: "--font-playfair",
+  display: "swap",
+});
+const garamond = EB_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-garamond",
   display: "swap",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — ${site.tagline}`,
+    default: `${site.name} — Attorneys at Law`,
     template: `%s — ${site.name}`,
   },
-  description: site.description,
+  description:
+    "Westbrook Legal — business and human rights law advice and representation. A general-practice law firm serving individuals and businesses.",
   keywords: [
     "law firm",
     "lawyer",
-    "attorney",
     "business law",
     "family law",
     "migration law",
+    "international law",
     "legal consultation",
   ],
-  openGraph: {
-    type: "website",
-    title: `${site.name} — ${site.tagline}`,
-    description: site.description,
-    url: site.url,
-    siteName: site.name,
-  },
   robots: { index: true, follow: true },
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "LegalService",
-    name: site.name,
-    description: site.description,
-    url: site.url,
-    telephone: site.phone,
-    email: site.email,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: site.address.line1,
-      addressLocality: "New York",
-      addressRegion: "NY",
-      postalCode: "10005",
-      addressCountry: "US",
-    },
-  };
-
   return (
-    <html lang="en" className={`${inter.variable} ${lora.variable}`}>
-      <body className="flex min-h-screen flex-col bg-paper">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-navy focus:px-4 focus:py-2 focus:text-sm focus:text-white"
-        >
-          Skip to content
-        </a>
-        <Navbar />
-        <main id="main" className="flex-1">
-          {children}
-        </main>
-        <Footer />
+    <html lang="en" dir="ltr" className={`${playfair.variable} ${garamond.variable}`}>
+      <body className="flex min-h-screen flex-col bg-coal">
+        <LanguageProvider>
+          <Navbar />
+          <main id="main" className="flex-1">
+            {children}
+          </main>
+          <Footer />
+        </LanguageProvider>
       </body>
     </html>
   );

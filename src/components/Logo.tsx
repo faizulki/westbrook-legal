@@ -1,36 +1,31 @@
+"use client";
+
 import Link from "next/link";
 import { site } from "@/lib/site";
-import { cn } from "@/lib/cn";
+import { useT } from "@/lib/i18n";
 
 /**
- * Logo — typographic monogram lockup. No image asset required, so the brand is
- * trivial to rename via site.ts. `tone` adapts it for light or dark backgrounds.
+ * Logo — gold geometric monogram + wordmark, echoing the template's framed
+ * monogram lockup. Pure CSS/SVG so the brand renames from config alone.
  */
-export function Logo({
-  className,
-  tone = "dark",
-}: {
-  className?: string;
-  tone?: "dark" | "light";
-}) {
-  const text = tone === "light" ? "text-white" : "text-navy";
-  const sub = tone === "light" ? "text-white/70" : "text-muted";
-
+export function Logo() {
+  const t = useT();
   return (
-    <Link
-      href="/"
-      aria-label={`${site.name} — home`}
-      className={cn("group inline-flex items-center gap-3", className)}
-    >
-      <span className="flex h-11 w-11 items-center justify-center rounded-md border border-gold/60 bg-gold/5 font-serif text-lg font-semibold tracking-tight text-gold transition-colors group-hover:bg-gold/10">
-        {site.initials}
+    <Link href="/" aria-label={`${t.brand.name} — home`} className="group inline-flex items-center gap-3">
+      <span className="relative grid h-12 w-12 place-items-center">
+        {/* Thin gold frame */}
+        <span className="absolute inset-0 rounded-sm border border-gold/70" />
+        <span className="absolute inset-1.5 rounded-sm border border-gold/30" />
+        <span className="font-display text-lg font-semibold tracking-tight text-gold-bright">
+          {site.initials}
+        </span>
       </span>
       <span className="flex flex-col leading-none">
-        <span className={cn("font-serif text-lg font-semibold tracking-wide", text)}>
-          {site.name}
+        <span className="font-display text-base font-semibold tracking-[0.16em] text-white">
+          {t.brand.name}
         </span>
-        <span className={cn("mt-1 text-[0.62rem] tracking-[0.28em] uppercase", sub)}>
-          Attorneys at Law
+        <span className="mt-1 text-[0.55rem] uppercase tracking-[0.34em] text-gold/80">
+          {t.brand.sub}
         </span>
       </span>
     </Link>

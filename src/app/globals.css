@@ -1,34 +1,38 @@
 @import "tailwindcss";
 
 /*
-  Westbrook Legal — Design System
-  Light, clean, professional. Navy + restrained gold on warm white.
+  Westbrook Legal — Template Edition
+  Faithful to the TM Juristbyrå template: dark charcoal canvas, light content
+  panels, gold accents, classic serif typography, EN/AR with RTL support.
 */
 
 @theme {
-  /* Surfaces */
-  --color-paper: #ffffff;       /* primary background */
-  --color-cream: #faf8f4;       /* warm secondary background */
-  --color-sand: #f3efe7;        /* subtle panel tint */
-  --color-line: #e7e1d5;        /* warm hairline borders */
+  /* Canvas */
+  --color-night: #0b0b0b;       /* header / top bar (black) */
+  --color-coal: #2e2e2e;        /* page background (dark charcoal) */
+  --color-stone: #6e6e6e;       /* section title bands / footer bar */
+  --color-graphite: #1c1c1c;    /* dark title bars */
 
-  /* Brand */
-  --color-navy: #16243d;        /* deep navy — headings, primary */
-  --color-navy-700: #1f3357;
-  --color-gold: #b1893f;        /* refined gold accent */
-  --color-gold-soft: #c8a767;
+  /* Panels */
+  --color-paper: #ffffff;
+  --color-cream: #f3f1ea;
+  --color-navy: #14233f;        /* navy info panels (branches / booking) */
+
+  /* Brand gold */
+  --color-gold: #b8975a;
+  --color-gold-bright: #d8be7e;
 
   /* Text */
-  --color-ink: #1f2a3a;         /* body heading text */
-  --color-slate: #4b5566;       /* body copy */
-  --color-muted: #8a8f99;       /* secondary/muted */
+  --color-ink: #1b1b1b;         /* on light panels — headings */
+  --color-slateblue: #3c4a63;   /* on light panels — body (bluish serif) */
+  --color-mist: #cfcfcf;        /* on dark — secondary text */
 
-  --color-background: var(--color-paper);
-  --color-foreground: var(--color-ink);
+  --color-background: var(--color-coal);
+  --color-foreground: #ffffff;
 
   /* Fonts (wired in layout via next/font) */
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-lora), ui-serif, Georgia, serif;
+  --font-display: var(--font-playfair), ui-serif, Georgia, serif;
+  --font-serif: var(--font-garamond), ui-serif, Georgia, serif;
 }
 
 html {
@@ -36,15 +40,15 @@ html {
 }
 
 body {
-  background: var(--color-paper);
-  color: var(--color-slate);
-  font-family: var(--font-sans);
+  background: var(--color-coal);
+  color: #ffffff;
+  font-family: var(--font-serif);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-  background: rgba(177, 137, 63, 0.18);
+  background: rgba(184, 151, 90, 0.3);
 }
 
 :focus-visible {
@@ -52,17 +56,25 @@ body {
   outline-offset: 2px;
 }
 
+/* Arabic typography — slightly larger, RTL-friendly */
+html[dir="rtl"] body {
+  font-family: "Segoe UI", Tahoma, var(--font-serif);
+}
+
 @layer utilities {
-  /* Thin uppercase eyebrow label */
-  .eyebrow {
-    letter-spacing: 0.22em;
+  /* Centered, letter-spaced serif title used in the grey section bands */
+  .band-title {
+    letter-spacing: 0.42em;
     text-transform: uppercase;
   }
+  html[dir="rtl"] .band-title {
+    letter-spacing: 0.12em;
+  }
 
-  /* Subtle scroll-reveal — paired with the Reveal client component */
+  /* Reveal-on-scroll (paired with the Reveal client component) */
   .reveal {
     opacity: 0;
-    transform: translateY(18px);
+    transform: translateY(16px);
     transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
       transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
   }

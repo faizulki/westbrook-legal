@@ -2,31 +2,21 @@ import Link from "next/link";
 import { type ComponentProps, type ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
-/**
- * Button — renders a Next.js Link when `href` is set, otherwise a <button>.
- * Three variants tuned for the light navy/gold palette.
- */
+/** Button — gold-forward primitive matching the template's booking buttons. */
 
-type Variant = "primary" | "outline" | "ghost";
-type Size = "md" | "lg";
+type Variant = "gold" | "navy" | "outline";
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-full font-medium transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold disabled:opacity-50 disabled:pointer-events-none";
+  "inline-flex items-center justify-center gap-2 font-display text-sm font-medium tracking-wide transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold disabled:opacity-50 disabled:pointer-events-none";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-navy text-white hover:bg-navy-700 shadow-sm",
-  outline: "border border-navy/25 text-navy hover:border-navy hover:bg-navy/[0.03]",
-  ghost: "text-navy hover:text-gold",
-};
-
-const sizes: Record<Size, string> = {
-  md: "px-6 py-2.5 text-sm",
-  lg: "px-8 py-3.5 text-[0.95rem]",
+  gold: "bg-gold text-night hover:bg-gold-bright",
+  navy: "bg-navy text-white hover:bg-navy/85",
+  outline: "border border-gold/60 text-gold hover:bg-gold hover:text-night",
 };
 
 type CommonProps = {
   variant?: Variant;
-  size?: Size;
   className?: string;
   children: ReactNode;
 };
@@ -41,8 +31,8 @@ type AsButton = CommonProps & { href?: undefined } & Omit<
   >;
 
 export function Button(props: AsLink | AsButton) {
-  const { variant = "primary", size = "md", className, children, ...rest } = props;
-  const classes = cn(base, variants[variant], sizes[size], className);
+  const { variant = "gold", className, children, ...rest } = props;
+  const classes = cn(base, "px-7 py-3", variants[variant], className);
 
   if (rest.href !== undefined) {
     const { href, ...linkRest } = rest;
@@ -52,7 +42,6 @@ export function Button(props: AsLink | AsButton) {
       </Link>
     );
   }
-
   const { href: _href, ...buttonRest } = rest;
   void _href;
   return (
