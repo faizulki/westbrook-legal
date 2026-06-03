@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+/*
+  Westbrook Legal — Design System
+  Light, clean, professional. Navy + restrained gold on warm white.
+*/
+
+@theme {
+  /* Surfaces */
+  --color-paper: #ffffff;       /* primary background */
+  --color-cream: #faf8f4;       /* warm secondary background */
+  --color-sand: #f3efe7;        /* subtle panel tint */
+  --color-line: #e7e1d5;        /* warm hairline borders */
+
+  /* Brand */
+  --color-navy: #16243d;        /* deep navy — headings, primary */
+  --color-navy-700: #1f3357;
+  --color-gold: #b1893f;        /* refined gold accent */
+  --color-gold-soft: #c8a767;
+
+  /* Text */
+  --color-ink: #1f2a3a;         /* body heading text */
+  --color-slate: #4b5566;       /* body copy */
+  --color-muted: #8a8f99;       /* secondary/muted */
+
+  --color-background: var(--color-paper);
+  --color-foreground: var(--color-ink);
+
+  /* Fonts (wired in layout via next/font) */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-lora), ui-serif, Georgia, serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-slate);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: rgba(177, 137, 63, 0.18);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+@layer utilities {
+  /* Thin uppercase eyebrow label */
+  .eyebrow {
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  /* Subtle scroll-reveal — paired with the Reveal client component */
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
